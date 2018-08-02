@@ -1,9 +1,11 @@
 const express = require('express')
 const server = express()
 
-const humanRouter = require('./routes/humans')
+const usersRouter = require('./routes/users')
 
-server.use('/api/humans', humanRouter)
+server.use(express.json())
+
+server.use('/api/users', usersRouter)
 
 
 module.exports = server
