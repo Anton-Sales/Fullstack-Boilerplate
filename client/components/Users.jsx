@@ -2,29 +2,35 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 
+import {getUsers} from '../api/users'
+
 class Users extends React.Component {
     constructor(props) {
         super(props)
-        console.log(props)
     }
 
-    getUsers(props) {
-        console.log(props)
-        return <div>
-            {props.users.map(user => <div>
-                <h1>{user.name}</h1>
-            </div>)}
-        </div>
+    componentDidMount() {
+        this.props.dispatch(getUsers())
+        console.log("give me some users")
     }
 
     render() {
+        const { users } = this.props
         return (
-           <div>
-               Im a user
-           </div> 
+            <div>
+                {users.map(user => <div>
+                    <h1>{user.name}</h1>
+                </div>)}
+            </div>
         )
     }
 }
+
+// function mapStateToProps (state) {
+//     return {
+//         users: state.users
+//     }
+// }
 
 const mapStateToProps = ({ users }) => ({
     users
